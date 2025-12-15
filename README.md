@@ -12,6 +12,7 @@ Ce projet est un serveur MCP (Model Context Protocol) qui fournit des outils et 
 - **Requests** : Bibliothèque pour effectuer des requêtes HTTP, utilisée pour le scraping web.
 - **BeautifulSoup4** : Bibliothèque pour analyser et extraire des données HTML, utilisée conjointement avec requests pour scraper des sites comme Marmiton.org.
 - **Python-Marmiton** : Bibliothèque spécifique pour interagir avec le site Marmiton.org.
+- **PyMongo** : Bibliothèque pour interagir avec MongoDB, utilisée pour interroger des bases de données.
 
 ### Outils de Développement
 - **uv** : Outil de gestion de paquets et d'exécution Python moderne, utilisé pour exécuter le serveur via `uv run python main.py`.
@@ -23,7 +24,7 @@ Ce projet est un serveur MCP (Model Context Protocol) qui fournit des outils et 
 
 ### Fonctionnalités Principales
 - **Ressources** : Fournit des listes d'ingrédients par défaut et des astuces de cuisine.
-- **Outils** : Permet de lister des ingrédients, inventer des recettes, scraper des recettes de Noël, et gérer des ingrédients magiques.
+- **Outils** : Permet de lister des ingrédients, inventer des recettes, scraper des recettes de Noël, gérer des ingrédients magiques, et interroger une base de données MongoDB 'recipies' (collections : comments, users, ustensils).
 - **Prompts** : Offre des prompts pour générer des recettes magiques et des astuces culinaires magiques.
 
 ## Installation et Exécution

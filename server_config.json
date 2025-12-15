@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "recipies": {
-      "command": "uv",
-      "args": ["run", "python", "main.py"]
+      "command": "C:/Users/pc/Desktop/demo-mcp/.venv/Scripts/python.exe",
+      "args": ["main.py"]
     }
   }
 }

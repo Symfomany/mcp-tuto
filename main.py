@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from mcp.server.fastmcp import FastMCP
 import asyncio
+from pymongo import MongoClient
 
 
 mcp = FastMCP("recipies")
@@ -118,6 +119,51 @@ async def scrape_christmsas_recipes() -> List[str]:
         if title:
             recipes.append(title)
     return recipes[:10]  # Limiter à 10 pour l'exemple
+
+@mcp.tool()
+async def query_mongodb(collection_name: str, query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la base de données MongoDB 'recipies' et retourne les résultats de la collection spécifiée."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db[collection_name]
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
+    return results
+
+@mcp.tool()
+async def query_comments(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'comments' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['comments']
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
+    return results
+
+@mcp.tool()
+async def query_users(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'users' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['users']
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
+    return results
+
+@mcp.tool()
+async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'ustensils' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['ustensils']
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
+    return results
+
 
 
 
