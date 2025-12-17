@@ -439,6 +439,8 @@ def magical_tips_prompt() -> str:
     """Prompt pour obtenir des astuces de cuisine magique."""
     return "Donne-moi des astuces pour cuisiner avec des ingrédients magiques, comme comment éviter les malédictions ou amplifier les sorts culinaires."
 
+
+
 # ---------
 # RUN
 # ---------
