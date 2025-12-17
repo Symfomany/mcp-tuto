@@ -13,7 +13,7 @@ import logging
 from bson import ObjectId
 from datetime import datetime
 
-
+### Logging configuration
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -22,7 +22,7 @@ logger = logging.getLogger("recipies")
 
 
 
-
+### Helper function to convert MongoDB documents to JSON-serializable format
 def _to_jsonable(doc: Dict[str, any]) -> Dict[str, any]:
     out = {}
     for k, v in doc.items():
@@ -38,7 +38,12 @@ def _to_jsonable(doc: Dict[str, any]) -> Dict[str, any]:
             out[k] = v
     return out
 
+
+# ---------
+# MCP INITIALIZATION
+# ---------
 mcp = FastMCP("recipies")
+
 
 # ---------
 # MODELS
@@ -358,57 +363,6 @@ async def scrape_christmsas_recipes() -> List[str]:
 
 
 
-### BDD MongoDB
-
-
-@mcp.tool(
-    name="query_comments",
-    description="Queries the 'comments' collection of the 'recipies' MongoDB database.",
-)
-async def query_comments(query: Optional[Dict] = None) -> List[Dict]:
-    """Interroge la collection 'comments' de la base de données MongoDB 'recipies'."""
-    client = MongoClient('mongodb://localhost:27017/')
-    db = client['recipies']
-    collection = db['comments']
-    query = query or {}
-    results = list(collection.find(query))
-    client.close()
-
-    return [_to_jsonable(doc) for doc in results]
-
-
-@mcp.tool(
-    name="query_users",
-    description="Queries the 'users' collection of the 'recipies' MongoDB database.",
-)
-async def query_users(query: Optional[Dict] = None) -> List[Dict]:
-    """Interroge la collection 'users' de la base de données MongoDB 'recipies'."""
-    client = MongoClient('mongodb://localhost:27017/')
-    db = client['recipies']
-    collection = db['users']
-    query = query or {}
-    docs  = list(collection.find(query))
-    client.close()
-    
-    return [_to_jsonable(doc) for doc in docs]
-
-
-@mcp.tool(
-    name="query_ustensils",
-    description="Queries the 'ustensils' collection of the 'recipies' MongoDB database.",
-)
-async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
-    """Interroge la collection 'ustensils' de la base de données MongoDB 'recipies'."""
-    client = MongoClient('mongodb://localhost:27017/')
-    db = client['recipies']
-    collection = db['ustensils']
-    query = query or {}
-    results = list(collection.find(query))
-    client.close()
-    
-    return [_to_jsonable(doc) for doc in results]
-
-
 @mcp.tool(
     name="get_recipe_by_index",
     description="Retrieves a Christmas recipe by its index (1-based).",
@@ -421,6 +375,57 @@ async def get_recipe_by_index(index: int) -> Dict:
     return {"error": "Index de recette invalide."}
 
 
+
+
+### BDD MongoDB
+
+
+# @mcp.tool(
+#     name="query_comments",
+#     description="Queries the 'comments' collection of the 'recipies' MongoDB database.",
+# )
+# async def query_comments(query: Optional[Dict] = None) -> List[Dict]:
+#     """Interroge la collection 'comments' de la base de données MongoDB 'recipies'."""
+#     client = MongoClient('mongodb://localhost:27017/')
+#     db = client['recipies']
+#     collection = db['comments']
+#     query = query or {}
+#     results = list(collection.find(query))
+#     client.close()
+
+#     return [_to_jsonable(doc) for doc in results]
+
+
+# @mcp.tool(
+#     name="query_users",
+#     description="Queries the 'users' collection of the 'recipies' MongoDB database.",
+# )
+# async def query_users(query: Optional[Dict] = None) -> List[Dict]:
+#     """Interroge la collection 'users' de la base de données MongoDB 'recipies'."""
+#     client = MongoClient('mongodb://localhost:27017/')
+#     db = client['recipies']
+#     collection = db['users']
+#     query = query or {}
+#     docs  = list(collection.find(query))
+#     client.close()
+    
+#     return [_to_jsonable(doc) for doc in docs]
+
+
+# @mcp.tool(
+#     name="query_ustensils",
+#     description="Queries the 'ustensils' collection of the 'recipies' MongoDB database.",
+# )
+# async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
+#     """Interroge la collection 'ustensils' de la base de données MongoDB 'recipies'."""
+#     client = MongoClient('mongodb://localhost:27017/')
+#     db = client['recipies']
+#     collection = db['ustensils']
+#     query = query or {}
+#     results = list(collection.find(query))
+#     client.close()
+    
+#     return [_to_jsonable(doc) for doc in results]
 
 # ---------
 # PROMPTS
