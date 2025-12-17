@@ -458,7 +458,7 @@ def magical_tips_prompt() -> str:
 # RUN
 # ---------
 def main():
-    mcp.run_http()
+    mcp.run()
 
 if __name__ == "__main__":
     main()
