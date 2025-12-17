@@ -4,7 +4,6 @@ from typing import List, Optional, Dict, Any
 import requests
 from bs4 import BeautifulSoup
 from mcp.server.fastmcp import FastMCP
-import asyncio
 from pymongo import MongoClient
 import random
 from pydantic import BaseModel, Field
