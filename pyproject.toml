@@ -11,4 +11,8 @@ dependencies = [
     "mcp-cli>=0.11.1",
     "python-marmiton>=0.4.2",
     "pymongo",
+    "fastapi[standard]>=0.124.4",
+    "logging>=0.4.9.6",
+    "httpx>=0.28.1",
+    "fastmcp>=2.14.1",
 ]
