@@ -428,6 +428,16 @@ async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
     return [_to_jsonable(doc) for doc in results]
 
 
+@mcp.tool(
+    name="get_recipe_by_index",
+    description="Retrieves a Christmas recipe by its index (1-based).",
+)
+async def get_recipe_by_index(index: int) -> Dict:
+    """Récupère une recette de Noël par son index (1-based)."""
+    recipes = christmas_recipes()
+    if 1 <= index <= len(recipes):
+        return recipes[index - 1].model_dump()
+    return {"error": "Index de recette invalide."}
 
 
 
@@ -448,18 +458,7 @@ def magical_tips_prompt() -> str:
 # RUN
 # ---------
 def main():
-    mcp.run(transport="stdio")
+    mcp.run_http()
 
 if __name__ == "__main__":
     main()
-
-@mcp.tool(
-    name="get_recipe_by_index",
-    description="Retrieves a Christmas recipe by its index (1-based).",
-)
-async def get_recipe_by_index(index: int) -> Dict:
-    """Récupère une recette de Noël par son index (1-based)."""
-    recipes = christmas_recipes()
-    if 1 <= index <= len(recipes):
-        return recipes[index - 1].model_dump()
-    return {"error": "Index de recette invalide."}
