@@ -358,23 +358,6 @@ async def scrape_christmsas_recipes() -> List[str]:
 
 
 
-def _to_jsonable(doc: Dict[str, Any]) -> Dict[str, Any]:
-    out = {}
-    for k, v in doc.items():
-        if isinstance(v, ObjectId):
-            out[k] = str(v)
-        elif isinstance(v, datetime):
-            out[k] = v.isoformat()
-        elif isinstance(v, dict):
-            out[k] = _to_jsonable(v)
-        elif isinstance(v, list):
-            out[k] = [_to_jsonable(x) if isinstance(x, dict) else x for x in v]
-        else:
-            out[k] = v
-    return out
-
-
-
 ### BDD MongoDB
 
 
