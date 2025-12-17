@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 import requests
 from bs4 import BeautifulSoup
 from mcp.server.fastmcp import FastMCP
@@ -21,9 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger("recipies")
 
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["recipes"]
-collection = db["recipes"]
+
 
 def _to_jsonable(doc: Dict[str, any]) -> Dict[str, any]:
     out = {}
