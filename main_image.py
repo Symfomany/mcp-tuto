@@ -39,6 +39,6 @@ async def get_recipe_image(
 
     return f"Image pour '{recipe_name}': {url} (Photographe: {photographer})"
 
-if __name__ == "__main__":
-    asyncio.run(setup())
-    main_mcp.run()
+# if __name__ == "__main__":
+#     asyncio.run(setup())
+#     main_mcp.run()

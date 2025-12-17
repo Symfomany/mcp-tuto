@@ -84,6 +84,6 @@ async def search_images(
         images=images,
     )
 
-if __name__ == "__main__":
-    # Démarre en mode MCP stdio (pour Claude Desktop, VS Code, MCPAgent…)
-    mcp.run()
+# if __name__ == "__main__":
+#     # Démarre en mode MCP stdio (pour Claude Desktop, VS Code, MCPAgent…)
+#     mcp.run()

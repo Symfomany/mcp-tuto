@@ -343,21 +343,21 @@ async def list_magical_ingredients(style: str = "basics") -> List[str]:
         return ["sang de dragon", "œil de troll", "racine de belladone", "poussière de vampire", "larmes de sirène"]
     return ["étoiles filantes", "nectar d'arc-en-ciel", "plumes de phénix", "ambre magique", "eau de source enchantée"]
 
-# @mcp.tool(
-#     name="scrape_christmas_recipes",
-#     description="Scrapes Christmas recipe titles from Marmiton.org.",
-# )
-# async def scrape_christmsas_recipes() -> List[str]:
-#     """Scrape les titres des recettes de Noël depuis Marmiton.org."""
-#     url = "https://www.marmiton.org/recettes/recherche.aspx?aqt=noël"
-#     response = requests.get(url)
-#     soup = BeautifulSoup(response.content, 'html.parser')
-#     recipes = []
-#     for item in soup.find_all('a', href=lambda x: x and '/recettes/recette_' in x):
-#         title = item.text.strip()
-#         if title:
-#             recipes.append(title)
-#     return recipes[:10]  # Limiter à 10 pour l'exemple
+@mcp.tool(
+    name="scrape_christmas_recipes",
+    description="Scrapes Christmas recipe titles from Marmiton.org.",
+)
+async def scrape_christmsas_recipes() -> List[str]:
+    """Scrape les titres des recettes de Noël depuis Marmiton.org."""
+    url = "https://www.marmiton.org/recettes/recherche.aspx?aqt=noël"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    recipes = []
+    for item in soup.find_all('a', href=lambda x: x and '/recettes/recette_' in x):
+        title = item.text.strip()
+        if title:
+            recipes.append(title)
+    return recipes[:10]  # Limiter à 10 pour l'exemple
 
 
 
@@ -379,52 +379,52 @@ async def get_recipe_by_index(index: int) -> Dict:
 ### BDD MongoDB
 
 
-# @mcp.tool(
-#     name="query_comments",
-#     description="Queries the 'comments' collection of the 'recipies' MongoDB database.",
-# )
-# async def query_comments(query: Optional[Dict] = None) -> List[Dict]:
-#     """Interroge la collection 'comments' de la base de données MongoDB 'recipies'."""
-#     client = MongoClient('mongodb://localhost:27017/')
-#     db = client['recipies']
-#     collection = db['comments']
-#     query = query or {}
-#     results = list(collection.find(query))
-#     client.close()
+@mcp.tool(
+    name="query_comments",
+    description="Queries the 'comments' collection of the 'recipies' MongoDB database.",
+)
+async def query_comments(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'comments' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['comments']
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
 
-#     return [_to_jsonable(doc) for doc in results]
+    return [_to_jsonable(doc) for doc in results]
 
 
-# @mcp.tool(
-#     name="query_users",
-#     description="Queries the 'users' collection of the 'recipies' MongoDB database.",
-# )
-# async def query_users(query: Optional[Dict] = None) -> List[Dict]:
-#     """Interroge la collection 'users' de la base de données MongoDB 'recipies'."""
-#     client = MongoClient('mongodb://localhost:27017/')
-#     db = client['recipies']
-#     collection = db['users']
-#     query = query or {}
-#     docs  = list(collection.find(query))
-#     client.close()
+@mcp.tool(
+    name="query_users",
+    description="Queries the 'users' collection of the 'recipies' MongoDB database.",
+)
+async def query_users(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'users' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['users']
+    query = query or {}
+    docs  = list(collection.find(query))
+    client.close()
     
-#     return [_to_jsonable(doc) for doc in docs]
+    return [_to_jsonable(doc) for doc in docs]
 
 
-# @mcp.tool(
-#     name="query_ustensils",
-#     description="Queries the 'ustensils' collection of the 'recipies' MongoDB database.",
-# )
-# async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
-#     """Interroge la collection 'ustensils' de la base de données MongoDB 'recipies'."""
-#     client = MongoClient('mongodb://localhost:27017/')
-#     db = client['recipies']
-#     collection = db['ustensils']
-#     query = query or {}
-#     results = list(collection.find(query))
-#     client.close()
+@mcp.tool(
+    name="query_ustensils",
+    description="Queries the 'ustensils' collection of the 'recipies' MongoDB database.",
+)
+async def query_ustensils(query: Optional[Dict] = None) -> List[Dict]:
+    """Interroge la collection 'ustensils' de la base de données MongoDB 'recipies'."""
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['recipies']
+    collection = db['ustensils']
+    query = query or {}
+    results = list(collection.find(query))
+    client.close()
     
-#     return [_to_jsonable(doc) for doc in results]
+    return [_to_jsonable(doc) for doc in results]
 
 # ---------
 # PROMPTS
@@ -439,13 +439,11 @@ def magical_tips_prompt() -> str:
     """Prompt pour obtenir des astuces de cuisine magique."""
     return "Donne-moi des astuces pour cuisiner avec des ingrédients magiques, comme comment éviter les malédictions ou amplifier les sorts culinaires."
 
-
-
 # ---------
 # RUN
 # ---------
-# def main():
-#     mcp.run()
+def main():
+    mcp.run()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
