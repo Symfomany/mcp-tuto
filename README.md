@@ -42,3 +42,62 @@ Ce projet est un serveur MCP (Model Context Protocol) qui fournit des outils et 
 ## Configuration MCP
 
 Le serveur est configuré via `server_config.json` pour être utilisé avec des clients MCP comme LM Studio.
+
+## Utilisation avec des Prompts
+
+Ce serveur MCP est conçu pour être utilisé avec un client compatible, comme un modèle de langage (LLM). Vous pouvez interagir avec le serveur en utilisant des prompts en langage naturel. Voici quelques exemples de ce que vous pouvez demander :
+
+### Explorer les Recettes de Noël
+
+Vous pouvez rechercher, lister et obtenir des détails sur les recettes de Noël.
+
+-   **"Liste-moi toutes les recettes de Noël."**
+    -   Cette commande appelle l'outil `list_christmas_recipes` et retourne une liste complète des recettes de Noël disponibles.
+
+-   **"Je cherche une recette avec des marrons."**
+    -   L'outil `search_by_ingredient` est utilisé avec le paramètre `ingredient="marrons"` pour trouver toutes les recettes contenant cet ingrédient.
+
+-   **"Donne-moi une recette de Noël au hasard."**
+    -   L'outil `get_random_recipe` est appelé pour retourner une seule recette de Noël de manière aléatoire.
+
+-   **"Propose-moi un menu complet pour le réveillon."**
+    -   L'outil `suggest_christmas_menu` génère un menu complet avec une entrée, un plat principal et un dessert.
+
+-   **"J'aimerais faire la recette de la 'Dinde de Noël', mais pour 12 personnes."**
+    -   L'outil `scale_recipe` est utilisé avec `recipe_name="Dinde de Noël"` and `servings=12` pour ajuster les quantités d'ingrédients.
+
+### Créer et Inventer des Recettes
+
+Le serveur peut vous aider à créer de nouvelles recettes à partir des ingrédients que vous avez.
+
+-   **"Invente-moi une recette avec du poulet, des champignons et de la crème."**
+    -   L'outil `invent_recipe` est appelé avec `ingredients=["poulet", "champignons", "crème"]` pour créer une nouvelle recette.
+
+-   **"Génère une recette à partir des ingrédients suivants : saumon, aneth, citron."**
+    -   L'outil `generate_recipe_from_ingredients` prendra la liste des ingrédients pour créer une nouvelle recette de Noël.
+
+### Cuisine Magique
+
+Pour une touche de fantaisie, vous pouvez explorer la cuisine magique.
+
+-   **"Je veux créer une recette magique avec de la poudre de licorne et des larmes de sirène."**
+    -   L'outil `invent_magical_recipe` est appelé avec `magical_ingredients=["poudre de licorne", "larmes de sirène"]`.
+
+-   **"Comment puis-je utiliser du sang de dragon en cuisine sans me faire maudire ?"**
+    -   Le prompt `astuces-magiques` est utilisé pour générer une réponse qui donne des conseils sur l'utilisation d'ingrédients magiques.
+
+-   **"Crée une recette magique fantastique et amusante avec des ailes de fée et des cristaux de lune."**
+    -   Le prompt `recette-magique` est utilisé avec les ingrédients `["ailes de fée", "cristaux de lune"]` pour générer une recette magique détaillée.
+
+### Outils Utilitaires
+
+Le serveur fournit également des outils pratiques.
+
+-   **"Crée une liste de courses pour la recette 'Bûche de Noël'."**
+    -   L'outil `create_shopping_list` est appelé avec `recipe_name="Bûche de Noël"` pour générer la liste des ingrédients nécessaires.
+
+-   **"Quel vin irait bien avec la 'Dinde de Noël' ?"**
+    -   L'outil `suggest_wine_pairing` est appelé avec `recipe_name="Dinde de Noël"` pour suggérer un accord mets-vin.
+
+-   **"Quelles sont les dernières recettes de Noël sur Marmiton ?"**
+    -   L'outil `scrape_christmas_recipes` est appelé pour scraper les titres des dernières recettes de Noël sur Marmiton.org.

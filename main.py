@@ -344,21 +344,21 @@ async def list_magical_ingredients(style: str = "basics") -> List[str]:
         return ["sang de dragon", "œil de troll", "racine de belladone", "poussière de vampire", "larmes de sirène"]
     return ["étoiles filantes", "nectar d'arc-en-ciel", "plumes de phénix", "ambre magique", "eau de source enchantée"]
 
-@mcp.tool(
-    name="scrape_christmas_recipes",
-    description="Scrapes Christmas recipe titles from Marmiton.org.",
-)
-async def scrape_christmsas_recipes() -> List[str]:
-    """Scrape les titres des recettes de Noël depuis Marmiton.org."""
-    url = "https://www.marmiton.org/recettes/recherche.aspx?aqt=noël"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
-    recipes = []
-    for item in soup.find_all('a', href=lambda x: x and '/recettes/recette_' in x):
-        title = item.text.strip()
-        if title:
-            recipes.append(title)
-    return recipes[:10]  # Limiter à 10 pour l'exemple
+# @mcp.tool(
+#     name="scrape_christmas_recipes",
+#     description="Scrapes Christmas recipe titles from Marmiton.org.",
+# )
+# async def scrape_christmsas_recipes() -> List[str]:
+#     """Scrape les titres des recettes de Noël depuis Marmiton.org."""
+#     url = "https://www.marmiton.org/recettes/recherche.aspx?aqt=noël"
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.content, 'html.parser')
+#     recipes = []
+#     for item in soup.find_all('a', href=lambda x: x and '/recettes/recette_' in x):
+#         title = item.text.strip()
+#         if title:
+#             recipes.append(title)
+#     return recipes[:10]  # Limiter à 10 pour l'exemple
 
 
 
