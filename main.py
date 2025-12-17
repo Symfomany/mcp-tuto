@@ -442,8 +442,8 @@ def magical_tips_prompt() -> str:
 # ---------
 # RUN
 # ---------
-# def main():
-#     mcp.run()
+def main():
+    mcp.run()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
